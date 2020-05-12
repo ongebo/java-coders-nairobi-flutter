@@ -1,4 +1,4 @@
-# javacodersnairobiflutter
+# Java Coders Nairobi
 
 A new Flutter application.
 
