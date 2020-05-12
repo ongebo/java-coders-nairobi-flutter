@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:javacodersnairobiflutter/view/coder_profile_view.dart';
+import 'package:javacodersnairobiflutter/coder_profile/view.dart';
+
+import 'model.dart';
 
 class AllCodersWidget extends StatefulWidget {
   @override
@@ -29,13 +31,6 @@ class _AllCodersState extends State<AllCodersWidget> {
       ],
     );
   }
-}
-
-class JavaCoder {
-  final String username;
-  final String avatarUrl;
-
-  const JavaCoder(this.username, this.avatarUrl);
 }
 
 class CoderCard extends StatelessWidget {

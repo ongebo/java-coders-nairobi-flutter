@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:javacodersnairobiflutter/view/all_coders_view.dart';
+import 'package:javacodersnairobiflutter/all_coders/view.dart';
 
 const appName = 'Java Coders Nairobi';
 
