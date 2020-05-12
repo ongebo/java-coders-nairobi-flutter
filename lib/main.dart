@@ -17,7 +17,7 @@ class App extends StatelessWidget {
         appBar: AppBar(
           title: Text(appName),
         ),
-        body: AllCodersWidget(),
+        body: AllCodersView(),
       ),
     );
   }
