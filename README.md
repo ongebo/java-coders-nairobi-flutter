@@ -1,16 +1,25 @@
 # Java Coders Nairobi
 
-A new Flutter application.
+A mobile app (Android and iOS) for viewing the top Java developers on Github from Nairobi. Data is pulled from the Github API.
 
-## Getting Started
+![Image](screenshots/app-flow.png)
 
-This project is a starting point for a Flutter application.
+## How to Run
+**NOTE:** Before proceeding, ensure to have [flutter](https://flutter.dev/docs/get-started/install) installed and configured.
 
-A few resources to get you started if this is your first Flutter project:
+### 1. Clone the project
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+```
+git clone https://github.com/ongebo/java-coders-nairobi-flutter.git
+```
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### 2. Set up a physical device or emulator
+
+For Android, follow [this](https://developer.android.com/training/basics/firstapp/running-app#RealDevice) guide to connect a physical device or an emulator.
+
+### 3. Run the app
+
+Navigate to the cloned project and execute this command from the terminal:
+```
+flutter run
+```
