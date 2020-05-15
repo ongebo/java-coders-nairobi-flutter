@@ -92,7 +92,7 @@ class CoderCard extends StatelessWidget {
   }
 
   void _handleCardTap(BuildContext context) {
-    Navigator.of(context).push(
-        MaterialPageRoute<void>(builder: (context) => CoderProfileView()));
+    Navigator.of(context).push(MaterialPageRoute<void>(
+        builder: (context) => CoderProfileView(username)));
   }
 }

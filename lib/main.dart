@@ -11,8 +11,7 @@ class App extends StatelessWidget {
     return MaterialApp(
       title: appName,
       theme: ThemeData(
-        primaryColor: Color(0xff5d6c5c),
-      ),
+          primaryColor: Color(0xff5d6c5c), accentColor: Color(0xff5d6c5c)),
       home: Scaffold(
         appBar: AppBar(
           title: Text(appName),

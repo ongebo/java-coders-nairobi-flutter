@@ -1,68 +1,98 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:javacodersnairobiflutter/coder_profile/model.dart';
+import 'package:javacodersnairobiflutter/coder_profile/repository.dart';
 
 class CoderProfileView extends StatelessWidget {
+  final String _coderUsername;
+
+  CoderProfileView(this._coderUsername);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Coder Profile'),
       ),
-      body: CoderProfileContent(),
+      body: CoderProfileContent(_coderUsername),
     );
   }
 }
 
 class CoderProfileContent extends StatelessWidget {
+  final String _coderUsername;
+
+  const CoderProfileContent(this._coderUsername);
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
         child: Container(
       padding: const EdgeInsets.all(16),
-      child: Column(
-        children: <Widget>[
-          Container(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
+      child: FutureBuilder(
+        future: getCoderProfile(_coderUsername),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            final CoderProfile coderProfile = snapshot.data;
+            return Column(
               children: <Widget>[
-                CircleAvatar(
-                  radius: 150,
-                  backgroundColor: Theme.of(context).primaryColor,
-                  child: Text('John Doe'),
+                Container(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      CircleAvatar(
+                        radius: 150,
+                        backgroundImage: NetworkImage(coderProfile.avatarUrl),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.only(top: 16),
+                        child: Text(
+                          coderProfile.username,
+                          style: TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.bold),
+                        ),
+                      )
+                    ],
+                  ),
                 ),
                 Container(
-                  padding: const EdgeInsets.only(top: 16),
+                  padding: const EdgeInsets.symmetric(vertical: 16),
                   child: Text(
-                    'John Doe',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    coderProfile.bio ?? '',
+                    textAlign: TextAlign.center,
                   ),
+                ),
+                ProfileDetails(coderProfile),
+                SizedBox(
+                  height: 16,
+                ),
+                MaterialButton(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16)),
+                  color: Theme.of(context).primaryColor,
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  child: Text(
+                    'Share'.toUpperCase(),
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: _handleShareButtonPress,
                 )
               ],
-            ),
-          ),
-          Container(
-            padding: const EdgeInsets.symmetric(vertical: 16),
-            child: Text(
-              'Some possibly really long description/bio for the developer at hand.',
-              textAlign: TextAlign.center,
-            ),
-          ),
-          ProfileDetails(),
-          SizedBox(
-            height: 16,
-          ),
-          MaterialButton(
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-            color: Theme.of(context).primaryColor,
-            padding: const EdgeInsets.symmetric(vertical: 16),
-            child: Text(
-              'Share'.toUpperCase(),
-              style: TextStyle(color: Colors.white),
-            ),
-            onPressed: _handleShareButtonPress,
-          )
-        ],
+            );
+          } else if (snapshot.hasError) {
+            return Center(
+              child: Text(
+                snapshot.error.toString(),
+                textAlign: TextAlign.center,
+              ),
+            );
+          } else {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+        },
       ),
     ));
   }
@@ -74,6 +104,9 @@ class CoderProfileContent extends StatelessWidget {
 
 class ProfileDetails extends StatelessWidget {
   final strongTextStyle = TextStyle(fontSize: 18, fontWeight: FontWeight.bold);
+  final CoderProfile _coderProfile;
+
+  ProfileDetails(this._coderProfile);
 
   @override
   Widget build(BuildContext context) {
@@ -84,7 +117,7 @@ class ProfileDetails extends StatelessWidget {
           child: Column(
             children: <Widget>[
               Text(
-                '56',
+                '${_coderProfile.numberOfPublicRepos}',
                 style: strongTextStyle,
               ),
               Text('Repos'),
@@ -94,7 +127,8 @@ class ProfileDetails extends StatelessWidget {
         Container(
           child: Column(
             children: <Widget>[
-              Text('132', style: strongTextStyle),
+              Text('${_coderProfile.numberOfFollowers}',
+                  style: strongTextStyle),
               Text('Followers'),
             ],
           ),
@@ -102,7 +136,8 @@ class ProfileDetails extends StatelessWidget {
         Container(
           child: Column(
             children: <Widget>[
-              Text('305', style: strongTextStyle),
+              Text('${_coderProfile.numberOfFollowedUsers}',
+                  style: strongTextStyle),
               Text('Following'),
             ],
           ),
