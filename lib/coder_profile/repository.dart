@@ -16,7 +16,8 @@ Future<CoderProfile> getCoderProfile(String coderUsername) async {
         username: profileMap['login'],
         numberOfPublicRepos: profileMap['public_repos'],
         numberOfFollowers: profileMap['followers'],
-        numberOfFollowedUsers: profileMap['following']);
+        numberOfFollowedUsers: profileMap['following'],
+        htmlUrl: profileMap['html_url']);
   } else {
     throw Exception('Error fetching coder profile.');
   }

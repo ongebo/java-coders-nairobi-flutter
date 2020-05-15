@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:javacodersnairobiflutter/coder_profile/model.dart';
 import 'package:javacodersnairobiflutter/coder_profile/repository.dart';
+import 'package:share/share.dart';
 
 class CoderProfileView extends StatelessWidget {
   final String _coderUsername;
@@ -76,7 +77,10 @@ class CoderProfileContent extends StatelessWidget {
                     'Share'.toUpperCase(),
                     style: TextStyle(color: Colors.white),
                   ),
-                  onPressed: _handleShareButtonPress,
+                  onPressed: () {
+                    Share.share(
+                        'Check out this awesome developer @${coderProfile.username}, ${coderProfile.htmlUrl}.');
+                  },
                 )
               ],
             );
@@ -95,10 +99,6 @@ class CoderProfileContent extends StatelessWidget {
         },
       ),
     ));
-  }
-
-  void _handleShareButtonPress() {
-    // TODO: Implement
   }
 }
 

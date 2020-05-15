@@ -5,6 +5,7 @@ class CoderProfile {
   int numberOfPublicRepos;
   int numberOfFollowers;
   int numberOfFollowedUsers;
+  String htmlUrl;
 
   CoderProfile(
       {this.avatarUrl,
@@ -12,5 +13,6 @@ class CoderProfile {
       this.bio,
       this.numberOfPublicRepos,
       this.numberOfFollowers,
-      this.numberOfFollowedUsers});
+      this.numberOfFollowedUsers,
+      this.htmlUrl});
 }
